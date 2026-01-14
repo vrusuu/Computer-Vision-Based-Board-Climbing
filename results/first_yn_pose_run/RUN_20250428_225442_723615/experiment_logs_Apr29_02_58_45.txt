@@ -1,0 +1,394 @@
+--------- config parameters ----------
+{
+    "checkpoint_params": {
+        "load_checkpoint": true,
+        "schema": null
+    },
+    "training_hyperparams": {
+        "lr_warmup_epochs": 1,
+        "lr_warmup_steps": 0,
+        "lr_cooldown_epochs": 0,
+        "warmup_initial_lr": 1e-08,
+        "cosine_final_lr_ratio": 0.005,
+        "optimizer": "AdamW",
+        "optimizer_params": {
+            "weight_decay": 1e-06
+        },
+        "criterion_params": {
+            "oks_sigmas": [
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1
+            ],
+            "classification_loss_weight": 1.0,
+            "classification_loss_type": "focal",
+            "regression_iou_loss_type": "ciou",
+            "iou_loss_weight": 2.5,
+            "dfl_loss_weight": 0.01,
+            "pose_cls_loss_weight": 1.0,
+            "pose_reg_loss_weight": 34.0,
+            "pose_classification_loss_type": "focal",
+            "rescale_pose_loss_with_assigned_score": true,
+            "assigner_multiply_by_pose_oks": true
+        },
+        "ema": true,
+        "batch_accumulate": 1,
+        "ema_params": {
+            "decay": 0.997,
+            "decay_type": "threshold"
+        },
+        "zero_weight_decay_on_bias_and_bn": true,
+        "load_opt_params": true,
+        "run_validation_freq": 1,
+        "run_test_freq": 1,
+        "save_model": true,
+        "metric_to_watch": "AP",
+        "launch_tensorboard": false,
+        "tb_files_user_prompt": false,
+        "silent_mode": false,
+        "mixed_precision": true,
+        "tensorboard_port": null,
+        "save_ckpt_epoch_list": [
+            5,
+            10,
+            15,
+            20
+        ],
+        "average_best_models": true,
+        "dataset_statistics": false,
+        "save_tensorboard_to_s3": false,
+        "lr_schedule_function": null,
+        "train_metrics_list": [],
+        "valid_metrics_list": [
+            "PoseEstimationMetrics()"
+        ],
+        "greater_metric_to_watch_is_better": true,
+        "precise_bn": false,
+        "precise_bn_batch_size": null,
+        "seed": 42,
+        "lr_mode": "cosine",
+        "phase_callbacks": [
+            "<super_gradients.training.utils.callbacks.extreme_batch_pose_visualization_callback.ExtremeBatchPoseEstimationVisualizationCallback object at 0x0000023F9A915F60>",
+            "EarlyStop"
+        ],
+        "log_installed_packages": true,
+        "sg_logger": "base_sg_logger",
+        "sg_logger_params": {
+            "tb_files_user_prompt": false,
+            "project_name": "",
+            "launch_tensorboard": false,
+            "tensorboard_port": null,
+            "save_checkpoints_remote": false,
+            "save_tensorboard_remote": false,
+            "save_logs_remote": false
+        },
+        "warmup_mode": "LinearBatchLRWarmup",
+        "step_lr_update_freq": null,
+        "lr_updates": [],
+        "initial_lr": 5e-05,
+        "clip_grad_norm": null,
+        "pre_prediction_callback": null,
+        "ckpt_best_name": "ckpt_best.pth",
+        "enable_qat": false,
+        "resume": true,
+        "resume_path": null,
+        "ckpt_name": "ckpt_latest.pth",
+        "resume_strict_load": false,
+        "sync_bn": false,
+        "kill_ddp_pgroup_on_end": true,
+        "max_train_batches": null,
+        "max_valid_batches": null,
+        "resume_from_remote_sg_logger": false,
+        "torch_compile": false,
+        "torch_compile_loss": false,
+        "torch_compile_options": {
+            "mode": "reduce-overhead",
+            "fullgraph": false,
+            "dynamic": false,
+            "backend": "inductor",
+            "options": null,
+            "disable": false
+        },
+        "finetune": false,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "max_epochs": {
+                    "type": "number",
+                    "minimum": 1
+                },
+                "lr_decay_factor": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "lr_warmup_epochs": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 10
+                },
+                "initial_lr": {
+                    "anyOf": [
+                        {
+                            "type": [
+                                "number",
+                                "string",
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        {
+                            "type": "object",
+                            "patternProperties": {
+                                "^[a-zA-Z0-9_.]+$": {
+                                    "type": "number"
+                                }
+                            },
+                            "additionalProperties": false
+                        }
+                    ]
+                }
+            },
+            "if": {
+                "properties": {
+                    "lr_mode": {
+                        "const": "StepLRScheduler"
+                    }
+                }
+            },
+            "then": {
+                "required": [
+                    "lr_updates",
+                    "lr_decay_factor"
+                ]
+            },
+            "required": [
+                "max_epochs",
+                "lr_mode",
+                "initial_lr",
+                "loss"
+            ]
+        },
+        "max_epochs": 8,
+        "loss": "yolo_nas_pose_loss",
+        "_convert_": "all"
+    },
+    "dataset_params": {
+        "train_dataset_params": null,
+        "train_dataloader_params": null,
+        "valid_dataset_params": null,
+        "valid_dataloader_params": null
+    },
+    "additional_log_items": {
+        "initial_LR": 5e-05,
+        "num_devices": 1,
+        "multi_gpu": "None",
+        "device_type": "NVIDIA GeForce RTX 3070",
+        "installed_packages": {
+            "deprecated": "1.2.18",
+            "jinja2": "3.1.3",
+            "markupsafe": "2.1.5",
+            "pyglm": "2.7.3",
+            "pyopengl": "3.1.5",
+            "pysocks": "1.7.1",
+            "pyyaml": "6.0.2",
+            "sphinx": "4.0.3",
+            "absl-py": "2.2.2",
+            "alabaster": "0.7.16",
+            "albumentations": "1.3.1",
+            "antlr4-python3-runtime": "4.9.3",
+            "arabic-reshaper": "3.0.0",
+            "asn1crypto": "1.5.1",
+            "asttokens": "3.0.0",
+            "attrs": "25.3.0",
+            "babel": "2.17.0",
+            "beautifulsoup4": "4.13.4",
+            "boto3": "1.38.3",
+            "botocore": "1.38.3",
+            "build": "1.2.2.post1",
+            "certifi": "2025.4.26",
+            "cffi": "1.17.1",
+            "charset-normalizer": "3.4.1",
+            "click": "8.1.8",
+            "colorama": "0.4.6",
+            "coloredlogs": "15.0.1",
+            "contourpy": "1.3.2",
+            "coverage": "5.3.1",
+            "cryptography": "44.0.2",
+            "cssselect2": "0.8.0",
+            "cycler": "0.12.1",
+            "data-gradients": "0.3.2",
+            "decorator": "5.2.1",
+            "defusedxml": "0.7.1",
+            "docutils": "0.17.1",
+            "einops": "0.3.2",
+            "exceptiongroup": "1.2.2",
+            "executing": "2.2.0",
+            "filelock": "3.13.1",
+            "flatbuffers": "25.2.10",
+            "fonttools": "4.57.0",
+            "fsspec": "2024.6.1",
+            "future": "1.0.0",
+            "gdown": "5.2.0",
+            "glfw": "2.7.0",
+            "grpcio": "1.71.0",
+            "html5lib": "1.1",
+            "humanfriendly": "10.0",
+            "hydra-core": "1.3.2",
+            "idna": "3.10",
+            "imagededup": "0.3.2",
+            "imageio": "2.37.0",
+            "imagesize": "1.4.1",
+            "ipython": "8.36.0",
+            "jedi": "0.19.2",
+            "jmespath": "1.0.1",
+            "joblib": "1.4.2",
+            "json-tricks": "3.16.1",
+            "jsonschema": "4.23.0",
+            "jsonschema-specifications": "2025.4.1",
+            "kiwisolver": "1.4.8",
+            "lazy-loader": "0.4",
+            "lxml": "5.4.0",
+            "markdown": "3.8",
+            "markdown-it-py": "3.0.0",
+            "matplotlib": "3.10.1",
+            "matplotlib-inline": "0.1.7",
+            "mdurl": "0.1.2",
+            "mpmath": "1.3.0",
+            "multipledispatch": "1.0.0",
+            "networkx": "3.3",
+            "numpy": "1.23.0",
+            "omegaconf": "2.3.0",
+            "onnx": "1.15.0",
+            "onnxruntime": "1.15.0",
+            "onnxsim": "0.4.36",
+            "opencv-python": "4.11.0.86",
+            "opencv-python-headless": "4.11.0.86",
+            "oscrypto": "1.3.0",
+            "packaging": "25.0",
+            "pandas": "2.2.3",
+            "parso": "0.8.4",
+            "pillow": "11.0.0",
+            "pip": "23.0.1",
+            "pip-tools": "7.4.1",
+            "platformdirs": "4.3.7",
+            "prompt-toolkit": "3.0.51",
+            "protobuf": "3.20.3",
+            "psutil": "7.0.0",
+            "pure-eval": "0.2.3",
+            "pydeprecate": "0.3.2",
+            "pycparser": "2.22",
+            "pygame": "2.6.0",
+            "pygments": "2.19.1",
+            "pyhanko": "0.26.0",
+            "pyhanko-certvalidator": "0.26.8",
+            "pyopengl-accelerate": "3.1.7",
+            "pyparsing": "3.2.3",
+            "pypdf": "5.4.0",
+            "pyproject-hooks": "1.2.0",
+            "pyreadline3": "3.5.4",
+            "pyrr": "0.10.3",
+            "python-bidi": "0.6.6",
+            "python-dateutil": "2.9.0.post0",
+            "pytz": "2025.2",
+            "pywavelets": "1.8.0",
+            "qrcode": "8.1",
+            "qudida": "0.0.4",
+            "rapidfuzz": "3.13.0",
+            "referencing": "0.36.2",
+            "reportlab": "3.6.13",
+            "requests": "2.32.3",
+            "rich": "14.0.0",
+            "rpds-py": "0.24.0",
+            "s3transfer": "0.12.0",
+            "scikit-image": "0.24.0",
+            "scikit-learn": "1.6.1",
+            "scipy": "1.13.1",
+            "seaborn": "0.13.2",
+            "setuptools": "80.0.0",
+            "six": "1.17.0",
+            "snowballstemmer": "2.2.0",
+            "soupsieve": "2.7",
+            "sphinx-rtd-theme": "1.3.0",
+            "sphinxcontrib-applehelp": "2.0.0",
+            "sphinxcontrib-devhelp": "2.0.0",
+            "sphinxcontrib-htmlhelp": "2.1.0",
+            "sphinxcontrib-jquery": "4.1",
+            "sphinxcontrib-jsmath": "1.0.1",
+            "sphinxcontrib-qthelp": "2.0.0",
+            "sphinxcontrib-serializinghtml": "2.0.0",
+            "stack-data": "0.6.3",
+            "stringcase": "1.2.0",
+            "super-gradients": "3.7.1",
+            "svglib": "1.5.1",
+            "sympy": "1.13.1",
+            "tensorboard": "2.19.0",
+            "tensorboard-data-server": "0.7.2",
+            "termcolor": "1.1.0",
+            "threadpoolctl": "3.6.0",
+            "tifffile": "2025.3.30",
+            "tinycss2": "1.4.0",
+            "tomli": "2.2.1",
+            "torch": "2.5.1+cu121",
+            "torchaudio": "2.5.1+cu121",
+            "torchmetrics": "0.8.0",
+            "torchvision": "0.20.1+cu121",
+            "tqdm": "4.67.1",
+            "traitlets": "5.14.3",
+            "treelib": "1.6.1",
+            "typing-extensions": "4.9.0",
+            "tzdata": "2025.2",
+            "tzlocal": "5.3.1",
+            "uritools": "4.0.3",
+            "urllib3": "2.4.0",
+            "wcwidth": "0.2.13",
+            "webencodings": "0.5.1",
+            "werkzeug": "3.1.3",
+            "wheel": "0.45.1",
+            "wrapt": "1.17.2",
+            "xhtml2pdf": "0.2.11",
+            "autocommand": "2.2.2",
+            "backports.tarfile": "1.2.0",
+            "importlib-metadata": "8.0.0",
+            "inflect": "7.3.1",
+            "jaraco.collections": "5.1.0",
+            "jaraco.context": "5.3.0",
+            "jaraco.functools": "4.0.1",
+            "jaraco.text": "3.12.1",
+            "more-itertools": "10.3.0",
+            "typeguard": "4.3.0",
+            "zipp": "3.19.2"
+        }
+    }
+}
+------- config parameters end --------
+
+Epoch 5 (6/8)  - Train_Inference_Time: 525144.75	Train_YoloNASPoseLoss/loss_cls: 0.07318974286317825	Train_YoloNASPoseLoss/loss_iou: 0.20953190326690674	Train_YoloNASPoseLoss/loss_dfl: 0.007525882683694363	Train_YoloNASPoseLoss/loss_pose_cls: 0.022279638797044754	Train_YoloNASPoseLoss/loss_pose_reg: 3.8011977672576904	Train_YoloNASPoseLoss/loss: 4.113726615905762	
+
+Epoch 5 (6/8)  - Valid_Inference_Time: 16868.56640625	Valid_YoloNASPoseLoss/loss_cls: 0.19120459258556366	Valid_YoloNASPoseLoss/loss_iou: 0.347785085439682	Valid_YoloNASPoseLoss/loss_dfl: 0.010705573484301567	Valid_YoloNASPoseLoss/loss_pose_cls: 0.030972100794315338	Valid_YoloNASPoseLoss/loss_pose_reg: 5.9810566902160645	Valid_YoloNASPoseLoss/loss: 6.561724662780762	Valid_AP: 0.685267711430788	Valid_AR: 0.7865306198596954	
+
+Epoch 5 (6/8)  - LR/default: 2.50225077034721e-07	
+
+Epoch 6 (7/8)  - Train_Inference_Time: 482014.9375	Train_YoloNASPoseLoss/loss_cls: 0.06927486509084702	Train_YoloNASPoseLoss/loss_iou: 0.2070210874080658	Train_YoloNASPoseLoss/loss_dfl: 0.007492663338780403	Train_YoloNASPoseLoss/loss_pose_cls: 0.022768298164010048	Train_YoloNASPoseLoss/loss_pose_reg: 3.585043430328369	Train_YoloNASPoseLoss/loss: 3.8916015625	
+
+Epoch 6 (7/8)  - Valid_Inference_Time: 16928.833984375	Valid_YoloNASPoseLoss/loss_cls: 0.17875221371650696	Valid_YoloNASPoseLoss/loss_iou: 0.3411003649234772	Valid_YoloNASPoseLoss/loss_dfl: 0.01055188849568367	Valid_YoloNASPoseLoss/loss_pose_cls: 0.02938862517476082	Valid_YoloNASPoseLoss/loss_pose_reg: 5.781850337982178	Valid_YoloNASPoseLoss/loss: 6.341641902923584	Valid_AP: 0.695031113922596	Valid_AR: 0.790631365776062	
+
+Epoch 6 (7/8)  - LR/default: 9.65625858762952e-06	
+
+Epoch 7 (8/8)  - Train_Inference_Time: 438573.375	Train_YoloNASPoseLoss/loss_cls: 0.06600049138069153	Train_YoloNASPoseLoss/loss_iou: 0.20577125251293182	Train_YoloNASPoseLoss/loss_dfl: 0.007505194749683142	Train_YoloNASPoseLoss/loss_pose_cls: 0.022234061732888222	Train_YoloNASPoseLoss/loss_pose_reg: 3.4794211387634277	Train_YoloNASPoseLoss/loss: 3.780935049057007	
+
+Epoch 7 (8/8)  - Valid_Inference_Time: 17216.71484375	Valid_YoloNASPoseLoss/loss_cls: 0.17615336179733276	Valid_YoloNASPoseLoss/loss_iou: 0.3404749631881714	Valid_YoloNASPoseLoss/loss_dfl: 0.010550408624112606	Valid_YoloNASPoseLoss/loss_pose_cls: 0.028576506301760674	Valid_YoloNASPoseLoss/loss_pose_reg: 5.722564697265625	Valid_YoloNASPoseLoss/loss: 6.2783203125	Valid_AP: 0.6976712480187416	Valid_AR: 0.793877562880516	
+
+Epoch 7 (8/8)  - LR/default: 2.7378255984052296e-06	

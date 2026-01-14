@@ -1,0 +1,45 @@
+[2025-04-30 03:18:00] INFO - super_gradients.common.crash_handler.crash_tips_setup - Crash tips is enabled. You can set your environment variable to CRASH_HANDLER=FALSE to disable it
+[2025-04-30 03:18:00] DEBUG - super_gradients.common.sg_loggers.clearml_sg_logger - Failed to import clearml
+[2025-04-30 03:18:01] DEBUG - hydra.core.utils - Setting JobRuntime:name=UNKNOWN_NAME
+[2025-04-30 03:18:01] DEBUG - hydra.core.utils - Setting JobRuntime:name=app
+[2025-04-30 03:18:01] DEBUG - hydra.core.utils - Setting JobRuntime:name=app
+[2025-04-30 03:18:01] WARNING - super_gradients.sanity_check.env_sanity_check - [31mFailed to verify operating system: Deci officially supports only Linux kernels. Some features may not work as expected.[0m
+[2025-04-30 03:18:02] DEBUG - hydra.core.utils - Setting JobRuntime:name=app
+[2025-04-30 03:18:02] WARNING - super_gradients.training.utils.checkpoint_utils - :warning: The pre-trained models provided by SuperGradients may have their own licenses or terms and conditions derived from the dataset used for pre-training.
+ It is your responsibility to determine whether you have permission to use the models for your use case.
+ The model you have requested was pre-trained on the coco_pose dataset, published under the following terms: https://cocodataset.org/#termsofuse
+[2025-04-30 03:18:02] INFO - super_gradients.training.utils.checkpoint_utils - License Notification: YOLO-NAS-POSE pre-trained weights are subjected to the specific license terms and conditions detailed in 
+https://github.com/Deci-AI/super-gradients/blob/master/LICENSE.YOLONAS-POSE.md
+By downloading the pre-trained weight files you agree to comply with these terms.
+[2025-04-30 03:18:03] INFO - super_gradients.training.utils.checkpoint_utils - Successfully loaded pretrained weights for architecture yolo_nas_pose_l
+[2025-04-30 03:18:03] DEBUG - super_gradients.training.utils.checkpoint_utils - Trying to load preprocessing params from checkpoint. Preprocessing params in checkpoint: True. Model YoloNASPose_L inherit HasPredict: True
+[2025-04-30 03:18:03] DEBUG - super_gradients.training.utils.checkpoint_utils - Successfully loaded preprocessing params from checkpoint {'conf': 0.05, 'image_processor': {'ComposeProcessing': {'processings': [<super_gradients.training.processing.processing.ReverseImageChannels object at 0x0000029B43077F10>, <super_gradients.training.processing.processing.KeypointsLongestMaxSizeRescale object at 0x0000029B43077D00>, <super_gradients.training.processing.processing.KeypointsBottomRightPadding object at 0x0000029B43077C10>, <super_gradients.training.processing.processing.StandardizeImage object at 0x0000029B43077940>, <super_gradients.training.processing.processing.ImagePermute object at 0x0000029B43077B50>]}}, 'edge_links': [[0, 1], [0, 2], [1, 2], [1, 3], [2, 4], [3, 5], [4, 6], [5, 6], [5, 7], [5, 11], [6, 8], [6, 12], [7, 9], [8, 10], [11, 12], [11, 13], [12, 14], [13, 15], [14, 16]], 'edge_colors': [[214, 39, 40], [148, 103, 189], [44, 160, 44], [140, 86, 75], [227, 119, 194], [127, 127, 127], [188, 189, 34], [127, 127, 127], [188, 189, 34], [140, 86, 75], [23, 190, 207], [227, 119, 194], [31, 119, 180], [255, 127, 14], [148, 103, 189], [255, 127, 14], [214, 39, 40], [31, 119, 180], [44, 160, 44]], 'keypoint_colors': [[148, 103, 189], [31, 119, 180], [148, 103, 189], [31, 119, 180], [148, 103, 189], [31, 119, 180], [148, 103, 189], [31, 119, 180], [148, 103, 189], [31, 119, 180], [148, 103, 189], [31, 119, 180], [148, 103, 189], [31, 119, 180], [148, 103, 189], [31, 119, 180], [148, 103, 189]]}
+[2025-04-30 03:18:03] INFO - super_gradients.training.sg_trainer.sg_trainer - Resuming training from latest run.
+[2025-04-30 03:18:03] INFO - super_gradients.training.sg_trainer.sg_trainer - Checkpoints directory: F:\Desktop\proj\results\first_yn_pose_run\RUN_20250428_225442_723615
+[2025-04-30 03:18:12] INFO - super_gradients.training.utils.checkpoint_utils - Successfully loaded model weights from F:\Desktop\proj\results\first_yn_pose_run\RUN_20250428_225442_723615\ckpt_latest.pth checkpoint.
+[2025-04-30 03:18:12] DEBUG - super_gradients.training.utils.checkpoint_utils - Trying to load preprocessing params from checkpoint. Preprocessing params in checkpoint: True. Model YoloNASPose_L inherit HasPredict: True
+[2025-04-30 03:18:12] DEBUG - super_gradients.training.utils.checkpoint_utils - Successfully loaded preprocessing params from checkpoint {'conf': 0.05, 'image_processor': {'ComposeProcessing': {'processings': [<super_gradients.training.processing.processing.KeypointsLongestMaxSizeRescale object at 0x0000029B6B31FE50>, <super_gradients.training.processing.processing.KeypointsBottomRightPadding object at 0x0000029B6B31FCA0>, <super_gradients.training.processing.processing.StandardizeImage object at 0x0000029B6B31FA90>, <super_gradients.training.processing.processing.ImagePermute object at 0x0000029B6B31FBE0>]}}, 'edge_links': [(0, 1), (1, 2), (2, 3), (13, 14), (1, 5), (5, 6), (6, 7), (1, 8), (8, 9), (9, 10), (10, 11), (8, 12), (12, 13), (4, 3)], 'edge_colors': [(214, 39, 40), (148, 103, 189), (44, 160, 44), (140, 86, 75), (227, 119, 194), (127, 127, 127), (188, 189, 34), (127, 127, 127), (188, 189, 34), (140, 86, 75), (23, 190, 207), (227, 119, 194), (31, 119, 180), (255, 127, 14)], 'keypoint_colors': [(148, 103, 189), (31, 119, 180), (148, 103, 189), (31, 119, 180), (148, 103, 189), (31, 119, 180), (148, 103, 189), (31, 119, 180), (148, 103, 189), (31, 119, 180), (148, 103, 189), (31, 119, 180), (148, 103, 189), (31, 119, 180)]}
+[2025-04-30 03:18:12] WARNING - super_gradients.training.sg_trainer.sg_trainer - [WARNING] Main network has been loaded from checkpoint but EMA network exists as well. It  will only be loaded during validation when training with ema=True. 
+[2025-04-30 03:18:12] INFO - super_gradients.training.sg_trainer.sg_trainer - Using EMA with params {'decay': 0.997, 'decay_type': 'threshold'}
+[2025-04-30 03:18:14] INFO - super_gradients.training.utils.sg_trainer_utils - TRAINING PARAMETERS:
+    - Mode:                         Single GPU
+    - Number of GPUs:               1          (1 available on the machine)
+    - Full dataset size:            2953       (len(train_set))
+    - Batch size per GPU:           8          (batch_size)
+    - Batch Accumulate:             1          (batch_accumulate)
+    - Total batch size:             8          (num_gpus * batch_size)
+    - Effective Batch size:         8          (num_gpus * batch_size * batch_accumulate)
+    - Iterations per epoch:         369        (len(train_loader))
+    - Gradient updates per epoch:   369        (len(train_loader) / batch_accumulate)
+    - Model: YoloNASPose_L  (79.36M parameters, 79.36M optimized)
+    - Learning Rates and Weight Decays:
+      - default: (79.36M parameters). LR: 2.500735372860465e-07 (79.36M parameters) WD: 0.0, (92.76K parameters), WD: 1e-06, (79.27M parameters)
+
+[2025-04-30 03:18:14] INFO - super_gradients.training.sg_trainer.sg_trainer - Couldn't fetch AP from the checkpoint.
+ Running test on the validation data before resuming training...
+[2025-04-30 03:18:47] INFO - super_gradients.training.sg_trainer.sg_trainer - Started training for 2 epochs (8/9)
+
+[2025-04-30 03:26:35] INFO - super_gradients.training.utils.early_stopping - Metric AP improved. New best score: 0.697
+[2025-04-30 03:34:04] INFO - super_gradients.training.utils.early_stopping - Metric AP improved by 0.005 >= min_delta = 0.0001. New best score: 0.702
+[2025-04-30 03:34:30] INFO - super_gradients.training.sg_trainer.sg_trainer - RUNNING ADDITIONAL TEST ON THE AVERAGED MODEL...
+[2025-04-30 03:34:47] INFO - super_gradients.common.sg_loggers.base_sg_logger - [CLEANUP] - Successfully stopped system monitoring process
